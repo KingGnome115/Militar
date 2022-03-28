@@ -15,6 +15,7 @@ public class Nodo
     private Object obj;
     private String etq;
     private Nodo sig;
+    private Nodo ant;
 
     public Nodo()
     {
