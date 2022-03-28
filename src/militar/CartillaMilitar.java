@@ -14,6 +14,22 @@ public class CartillaMilitar {
     private int clase;
     private Boolean remiso;
 
+    public CartillaMilitar()
+    {
+    }
+
+    public CartillaMilitar(String nombre, int clase, Boolean remiso)
+    {
+        this.nombre = nombre;
+        this.clase = clase;
+        if(clase == 18){
+            this.remiso = false;
+        }else{
+            this.remiso = true;
+        }
+    }
+
+    
 
     /**
      * @return the nombre
@@ -64,20 +80,13 @@ public class CartillaMilitar {
     }
 
     
-    public void validar (int calse, boolean remiso) {
-        if (clase == 18)
+    public boolean validar (int calse, boolean remiso) {
+        if (clase >= 18)
         {
             System.out.println("Perfecto para la cartilla");
-            remiso = false;
-            
-        }else
-            if (clase >18)
-        {
-            remiso = true;
-        } else
-            {
-                System.out.println("Menor de edad no entra al registro");
-            }
+            return true;
+        }
+        return false;
     }
     
 }
