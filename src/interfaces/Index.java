@@ -7,6 +7,8 @@ package interfaces;
 
 import militar.ColasD;
 import cjb.ci.Validaciones;
+import militar.Nodo;
+import militar.PilasD;
 
 /**
  *
@@ -14,7 +16,9 @@ import cjb.ci.Validaciones;
  */
 public class Index extends javax.swing.JFrame
 {
+
     public static ColasD general = new ColasD();
+
     /**
      * Creates new form Index
      */
@@ -41,6 +45,7 @@ public class Index extends javax.swing.JFrame
         btnTodos = new javax.swing.JButton();
         btnRemisos = new javax.swing.JButton();
         btnQuitarRemisos = new javax.swing.JButton();
+        btnAltas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,6 +67,13 @@ public class Index extends javax.swing.JFrame
         });
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
@@ -98,6 +110,15 @@ public class Index extends javax.swing.JFrame
             }
         });
 
+        btnAltas.setText("Agregar");
+        btnAltas.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnAltasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -112,7 +133,8 @@ public class Index extends javax.swing.JFrame
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(btnRemisos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnTodos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(btnQuitarRemisos)))
+                            .addComponent(btnQuitarRemisos)
+                            .addComponent(btnAltas, javax.swing.GroupLayout.Alignment.LEADING)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -127,7 +149,7 @@ public class Index extends javax.swing.JFrame
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(60, 60, 60)
@@ -135,7 +157,9 @@ public class Index extends javax.swing.JFrame
                         .addGap(18, 18, 18)
                         .addComponent(btnRemisos)
                         .addGap(18, 18, 18)
-                        .addComponent(btnQuitarRemisos)))
+                        .addComponent(btnQuitarRemisos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAltas)))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
@@ -157,7 +181,7 @@ public class Index extends javax.swing.JFrame
     private void btnQuitarRemisosActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnQuitarRemisosActionPerformed
     {//GEN-HEADEREND:event_btnQuitarRemisosActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_btnQuitarRemisosActionPerformed
 
     private void btnRemisosActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnRemisosActionPerformed
@@ -168,8 +192,8 @@ public class Index extends javax.swing.JFrame
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtBuscarActionPerformed
     {//GEN-HEADEREND:event_txtBuscarActionPerformed
         // TODO add your handling code here:
-        
-        
+
+
     }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtBuscarKeyTyped
@@ -183,6 +207,52 @@ public class Index extends javax.swing.JFrame
             cjb.ci.Validaciones.validaAlfabeticos(evt);
         }
     }//GEN-LAST:event_txtBuscarKeyTyped
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnBuscarActionPerformed
+    {//GEN-HEADEREND:event_btnBuscarActionPerformed
+
+        PilasD tmp = new PilasD();
+        Nodo aux = general.elimina();
+        Nodo enc = null;
+        while (aux != null)
+        {
+            if (aux.getEtq().compareTo(txtBuscar.getText()) != 0)
+            {
+                tmp.inserta(aux);
+                aux = general.elimina();
+            } else
+            {
+                enc = aux;
+                tmp.inserta(aux);
+                break;
+            }
+        }
+
+        if (enc == null)
+        {
+            System.out.println("No encontre el elemento");
+        }else{
+            System.out.println("Si encontre a "+ enc.getEtq());
+        }
+
+        aux = tmp.elimina();
+        while (aux != null)
+        {
+            general.inserta(aux);
+            aux = tmp.elimina();
+        }
+
+
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnAltasActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAltasActionPerformed
+    {//GEN-HEADEREND:event_btnAltasActionPerformed
+        
+        this.dispose();
+        this.setVisible(false);
+        new AltaMilitar().setVisible(true);
+        
+    }//GEN-LAST:event_btnAltasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,6 +300,7 @@ public class Index extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAltas;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnQuitarRemisos;
     private javax.swing.JButton btnRemisos;

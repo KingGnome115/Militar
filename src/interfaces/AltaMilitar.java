@@ -161,6 +161,11 @@ public class AltaMilitar extends javax.swing.JFrame
             JOptionPane.showMessageDialog(this, "Los menores de edad no pueden ser registrados");
         }
         
+        this.dispose();
+        this.setVisible(false);
+        
+        new Index().setVisible(true);
+        
         
     }//GEN-LAST:event_btnAceptarActionPerformed
 
@@ -179,7 +184,7 @@ public class AltaMilitar extends javax.swing.JFrame
     private void txtClaseKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtClaseKeyTyped
     {//GEN-HEADEREND:event_txtClaseKeyTyped
         // TODO add your handling code here:
-        if (txtClase.getText().length() == 30)
+        if (txtClase.getText().length() == 2)
         {
             evt.consume();
         } else
