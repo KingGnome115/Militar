@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package interfaces;
+import cjb.ci.Validaciones;
 import javax.swing.JOptionPane;
 import militar.CartillaMilitar;
 import militar.Nodo;
@@ -49,6 +50,21 @@ public class AltaMilitar extends javax.swing.JFrame
 
         jLabel1.setText("Nombre:");
 
+        txtNombre.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                txtNombreActionPerformed(evt);
+            }
+        });
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                txtNombreKeyTyped(evt);
+            }
+        });
+
         jLabel2.setText("Clase:");
 
         btnAceptar.setText("Aceptar");
@@ -61,6 +77,21 @@ public class AltaMilitar extends javax.swing.JFrame
         });
 
         btnCancelar.setText("Cancelar");
+
+        txtClase.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                txtClaseActionPerformed(evt);
+            }
+        });
+        txtClase.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                txtClaseKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -132,6 +163,42 @@ public class AltaMilitar extends javax.swing.JFrame
         
         
     }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtNombreKeyTyped
+    {//GEN-HEADEREND:event_txtNombreKeyTyped
+        // TODO add your handling code here:
+        if (txtNombre.getText().length() == 30)
+        {
+            evt.consume();
+        } else
+        {
+            cjb.ci.Validaciones.validaAlfabeticos(evt);
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtClaseKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtClaseKeyTyped
+    {//GEN-HEADEREND:event_txtClaseKeyTyped
+        // TODO add your handling code here:
+        if (txtClase.getText().length() == 30)
+        {
+            evt.consume();
+        } else
+        {
+            cjb.ci.Validaciones.validaEntero(evt);
+        }
+        
+    }//GEN-LAST:event_txtClaseKeyTyped
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtNombreActionPerformed
+    {//GEN-HEADEREND:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void txtClaseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtClaseActionPerformed
+    {//GEN-HEADEREND:event_txtClaseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtClaseActionPerformed
 
     /**
      * @param args the command line arguments
