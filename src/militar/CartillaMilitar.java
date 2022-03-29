@@ -18,7 +18,7 @@ public class CartillaMilitar {
     {
     }
 
-    public CartillaMilitar(String nombre, int clase, Boolean remiso)
+    public CartillaMilitar(String nombre, int clase)
     {
         this.nombre = nombre;
         this.clase = clase;
@@ -77,16 +77,6 @@ public class CartillaMilitar {
     public void setRemiso(Boolean remiso)
     {
         this.remiso = remiso;
-    }
-
-    
-    public boolean validar (int calse, boolean remiso) {
-        if (clase >= 18)
-        {
-            System.out.println("Perfecto para la cartilla");
-            return true;
-        }
-        return false;
     }
     
 }

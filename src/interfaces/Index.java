@@ -5,13 +5,15 @@
  */
 package interfaces;
 
+import militar.ColasD;
+
 /**
  *
  * @author Kevin
  */
 public class Index extends javax.swing.JFrame
 {
-
+    public static ColasD general = new ColasD();
     /**
      * Creates new form Index
      */

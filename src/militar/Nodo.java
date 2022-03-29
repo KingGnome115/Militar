@@ -26,13 +26,12 @@ public class Nodo
         this.etq = etq;
     }
 
-    public Nodo(Object obj, String etq, Nodo sig)
+
+    public Nodo(Object obj, String etq)
     {
         this.obj = obj;
         this.etq = etq;
-        this.sig = sig;
     }
-
     /**
      * @return the obj
      */
