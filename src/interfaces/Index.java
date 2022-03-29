@@ -7,6 +7,8 @@ package interfaces;
 
 import militar.ColasD;
 import cjb.ci.Validaciones;
+import javax.swing.JOptionPane;
+import militar.CartillaMilitar;
 import militar.Nodo;
 import militar.PilasD;
 
@@ -17,7 +19,8 @@ import militar.PilasD;
 public class Index extends javax.swing.JFrame
 {
 
-    public static ColasD general = new ColasD();
+    public static ColasD general;
+    public  static boolean ban = false;
 
     /**
      * Creates new form Index
@@ -25,7 +28,86 @@ public class Index extends javax.swing.JFrame
     public Index()
     {
         initComponents();
+        if(!ban){
+            general = new ColasD();
+            ban = true;
+        }
     }
+
+    public void mostrarTodos()
+    {
+        PilasD tmp = new PilasD();
+        int tama = Index.general.getTam();
+        String matriz[][] = new String[tama][3];
+        for (int i = 0; i < tama; i++)
+        {
+            Nodo aux = Index.general.elimina();
+            CartillaMilitar obj = (CartillaMilitar) aux.getObj();
+            matriz[i][0] = obj.getNombre();
+            matriz[i][1] = obj.getClase() + "";
+            matriz[i][2] = obj.getRemiso() + "";
+            tmp.inserta(aux);
+        }
+
+        tablaPri.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]
+        {
+            "Nombre","Clase","Remisos"
+        })
+              
+        {
+            @Override
+            public boolean isCellEditable(int filas, int columnas)
+            {
+                if (columnas != 0)
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
+            }
+        }
+        );
+        tablaPri.setEnabled(false);
+        
+        Nodo aux  = tmp.elimina();
+        while (aux != null)
+        {
+            Index.general.inserta(aux);
+            aux = tmp.elimina();
+        }
+    }
+    
+     public void mostrarEnc(Nodo enc)
+    {
+        String matriz[][] = new String[1][3];
+            CartillaMilitar obj = (CartillaMilitar) enc.getObj();
+            matriz[0][0] = obj.getNombre();
+            matriz[0][1] = obj.getClase() + "";
+            matriz[0][2] = obj.getRemiso() + "";
+
+        tablaPri.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]
+        {
+            "Nombre","Clase","Remisos"
+        })
+              
+        {
+            @Override
+            public boolean isCellEditable(int filas, int columnas)
+            {
+                if (columnas != 0)
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
+            }
+        }
+        );
+        tablaPri.setEnabled(false);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -41,7 +123,7 @@ public class Index extends javax.swing.JFrame
         txtBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaPri = new javax.swing.JTable();
         btnTodos = new javax.swing.JButton();
         btnRemisos = new javax.swing.JButton();
         btnQuitarRemisos = new javax.swing.JButton();
@@ -75,7 +157,7 @@ public class Index extends javax.swing.JFrame
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaPri.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
                 {},
@@ -88,9 +170,16 @@ public class Index extends javax.swing.JFrame
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaPri);
 
         btnTodos.setText("Todos");
+        btnTodos.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnTodosActionPerformed(evt);
+            }
+        });
 
         btnRemisos.setText("Remisos");
         btnRemisos.addActionListener(new java.awt.event.ActionListener()
@@ -230,9 +319,11 @@ public class Index extends javax.swing.JFrame
 
         if (enc == null)
         {
-            System.out.println("No encontre el elemento");
-        }else{
-            System.out.println("Si encontre a "+ enc.getEtq());
+            JOptionPane.showMessageDialog(this, "No se encontro el dato");
+        } else
+        {
+            System.out.println("Si encontre a " + enc.getEtq());
+            mostrarEnc(enc);
         }
 
         aux = tmp.elimina();
@@ -247,12 +338,18 @@ public class Index extends javax.swing.JFrame
 
     private void btnAltasActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAltasActionPerformed
     {//GEN-HEADEREND:event_btnAltasActionPerformed
-        
+
         this.dispose();
         this.setVisible(false);
         new AltaMilitar().setVisible(true);
-        
+        mostrarTodos();
+
     }//GEN-LAST:event_btnAltasActionPerformed
+
+    private void btnTodosActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnTodosActionPerformed
+    {//GEN-HEADEREND:event_btnTodosActionPerformed
+        mostrarTodos();
+    }//GEN-LAST:event_btnTodosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -307,7 +404,7 @@ public class Index extends javax.swing.JFrame
     private javax.swing.JButton btnTodos;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaPri;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

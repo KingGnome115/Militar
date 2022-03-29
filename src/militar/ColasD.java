@@ -11,9 +11,10 @@ package militar;
  */
 public class ColasD
 {
-    
+
     private Nodo f;
     private Nodo a;
+    private int tam;
 
     /**
      * @return the f
@@ -46,7 +47,7 @@ public class ColasD
     {
         this.a = a;
     }
-    
+
     public boolean inserta(Nodo n)
     {
         if (n == null)
@@ -62,10 +63,12 @@ public class ColasD
                 a.setSig(n);
                 a = n;
             }
+            tam ++;
+            System.out.println(tam);
             return true;
         }
     }
-    
+
     public Nodo elimina()
     {
         if (f == null)
@@ -82,7 +85,24 @@ public class ColasD
                 f = aux.getSig();
                 aux.setSig(null);
             }
+            tam -- ;
             return aux;
         }
+    }
+
+    /**
+     * @return the tam
+     */
+    public int getTam()
+    {
+        return tam;
+    }
+
+    /**
+     * @param tam the tam to set
+     */
+    public void setTam(int tam)
+    {
+        this.tam = tam;
     }
 }

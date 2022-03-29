@@ -157,16 +157,16 @@ public class AltaMilitar extends javax.swing.JFrame
             CartillaMilitar nuevo = new CartillaMilitar(nombre, edad);
             Nodo nw = new Nodo(nuevo, nombre);
             Index.general.inserta(nw);
+            System.out.println(Index.general);
+            this.dispose();
+            this.setVisible(false);
+            new Index().setVisible(true);
         }else{
             JOptionPane.showMessageDialog(this, "Los menores de edad no pueden ser registrados");
         }
         
-        this.dispose();
-        this.setVisible(false);
         
-        new Index().setVisible(true);
-        
-        
+             
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtNombreKeyTyped
