@@ -167,32 +167,28 @@ public class AltaMilitar extends javax.swing.JFrame
             CartillaMilitar nuevo = new CartillaMilitar(nombre, edad);
             Nodo nw = new Nodo(nuevo, nombre);
             Index.general.inserta(nw);
-            System.out.println(Index.general);
-            this.dispose();
-            this.setVisible(false);
-            new Index().setVisible(true);
-            
-                       
-        }else{
-            JOptionPane.showMessageDialog(this, "Los menores de edad no pueden ser registrados");
-        }
-        
-        /********************** H E L P *********************/
-            String cad[] = new String[1000];
-            Bicolas<String> bc = new Bicolas<>(cad);
-            
             if (edad>18)
             {
                 //Remisos se insertarán de lado izq (modifica el atras1)
-                bc.setAtras1(bc.inserta(txtNombre.getText(), bc.getAtras1(), bc.getAtras2(), 1));
+                Index.bc.setAtras1(Index.bc.inserta(txtNombre.getText(), Index.bc.getAtras1(), Index.bc.getAtras2(), 1));
                 System.out.println("Lado izquierdo");
                 
             } else
             {
                 //No Remisos insertarán de lado der (modifica el atras2)
-                bc.setAtras2(bc.inserta(txtNombre.getText(), bc.getAtras2(), bc.getAtras1(), -1));
+                Index.bc.setAtras2(Index.bc.inserta(txtNombre.getText(), Index.bc.getAtras2(), Index.bc.getAtras1(), -1));
                 System.out.println("Lado derecho");
             }
+            this.dispose();
+            this.setVisible(false);
+            new Index().setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this, "Los menores de edad no pueden ser registrados");
+            txtClase.setText("");
+            txtNombre.setText("");
+        }
+        
+        /********************** H E L P *********************/
             
   
              

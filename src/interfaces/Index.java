@@ -23,6 +23,7 @@ public class Index extends javax.swing.JFrame
     public static ColasD general;
     public static Bicolas bcolas;
     public  static boolean ban = false;
+    public static Bicolas<String> bc = new Bicolas<>(new String[1000]);
 
     /**
      * Creates new form Index
