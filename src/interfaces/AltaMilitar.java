@@ -5,7 +5,10 @@
  */
 package interfaces;
 import cjb.ci.Validaciones;
+import static java.awt.image.ImageObserver.ERROR;
+import static java.awt.image.ImageObserver.WIDTH;
 import javax.swing.JOptionPane;
+import militar.Bicolas;
 import militar.CartillaMilitar;
 import militar.Nodo;
 
@@ -161,11 +164,30 @@ public class AltaMilitar extends javax.swing.JFrame
             this.dispose();
             this.setVisible(false);
             new Index().setVisible(true);
+            
+                       
         }else{
             JOptionPane.showMessageDialog(this, "Los menores de edad no pueden ser registrados");
         }
         
-        
+        /********************** H E L P *********************/
+            String cad[] = new String[1000];
+            Bicolas<String> bc = new Bicolas<>(cad);
+            
+            if (edad>18)
+            {
+                //Remisos se insertarán de lado izq (modifica el atras1)
+                bc.setAtras1(bc.inserta(txtNombre.getText(), bc.getAtras1(), bc.getAtras2(), 1));
+                System.out.println("Lado izquierdo");
+                
+            } else
+            {
+                //No Remisos insertarán de lado der (modifica el atras2)
+                bc.setAtras2(bc.inserta(txtNombre.getText(), bc.getAtras2(), bc.getAtras1(), -1));
+                System.out.println("Lado derecho");
+            }
+            
+  
              
     }//GEN-LAST:event_btnAceptarActionPerformed
 

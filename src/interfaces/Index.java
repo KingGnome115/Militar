@@ -8,6 +8,7 @@ package interfaces;
 import militar.ColasD;
 import cjb.ci.Validaciones;
 import javax.swing.JOptionPane;
+import militar.Bicolas;
 import militar.CartillaMilitar;
 import militar.Nodo;
 import militar.PilasD;
@@ -20,6 +21,7 @@ public class Index extends javax.swing.JFrame
 {
 
     public static ColasD general;
+    public static Bicolas bcolas;
     public  static boolean ban = false;
 
     /**
@@ -77,6 +79,56 @@ public class Index extends javax.swing.JFrame
             aux = tmp.elimina();
         }
     }
+    
+    public void mostrarRemisos()
+    {
+        ColasD tmp2 = new ColasD();
+        int tamanio = Index.bcolas.getAtras1();        
+        String matriz[][] = new String[tamanio][3];
+        for (int i = 0; i < tamanio; i++)
+        {
+            Object arr[] = bcolas.elimina(bcolas.getAtras2(), bcolas.getCola().length, -1);
+            arr = bcolas.elimina(bcolas.getAtras1(), -1, 1);
+            bcolas.setAtras1((int) arr[1]);
+            
+            
+            Nodo aux = Index.general.elimina();
+            CartillaMilitar obj = (CartillaMilitar) aux.getObj();
+            matriz[i][0] = obj.getNombre();
+            matriz[i][1] = obj.getClase() + "";
+            matriz[i][2] = obj.getRemiso() + "";
+            tmp2.inserta(aux);
+        }
+
+        tablaPri.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]
+        {
+            "Nombre","Clase","Remisos"
+        })
+              
+        {
+            @Override
+            public boolean isCellEditable(int filas, int columnas)
+            {
+                if (columnas != 0)
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
+            }
+        }
+        );
+        tablaPri.setEnabled(false);
+        
+        Nodo aux  = tmp2.elimina();
+        while (aux != null)
+        {
+            Index.general.inserta(aux);
+            aux = tmp2.elimina();
+        }
+    }
+    
     
      public void mostrarEnc(Nodo enc)
     {
@@ -276,6 +328,13 @@ public class Index extends javax.swing.JFrame
     private void btnRemisosActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnRemisosActionPerformed
     {//GEN-HEADEREND:event_btnRemisosActionPerformed
         // TODO add your handling code here:
+        
+        
+        
+        
+        
+        
+        
     }//GEN-LAST:event_btnRemisosActionPerformed
 
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtBuscarActionPerformed
