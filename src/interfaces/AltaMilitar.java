@@ -4,14 +4,10 @@
  * and open the template in the editor.
  */
 package interfaces;
-import cjb.ci.Validaciones;
-import static java.awt.image.ImageObserver.ERROR;
-import static java.awt.image.ImageObserver.WIDTH;
+
 import javax.swing.JOptionPane;
-import militar.Bicolas;
 import militar.CartillaMilitar;
 import militar.Nodo;
-
 
 /**
  *
@@ -162,36 +158,27 @@ public class AltaMilitar extends javax.swing.JFrame
     {//GEN-HEADEREND:event_btnAceptarActionPerformed
         
         int edad = Integer.parseInt(txtClase.getText());
-        if(edad >= 18){
+        if (edad >= 18)
+        {
             String nombre = txtNombre.getText();
             CartillaMilitar nuevo = new CartillaMilitar(nombre, edad);
             Nodo nw = new Nodo(nuevo, nombre);
             Index.general.inserta(nw);
-            if (edad>18)
-            {
-                //Remisos se insertarán de lado izq (modifica el atras1)
-                Index.bc.setAtras1(Index.bc.inserta(txtNombre.getText(), Index.bc.getAtras1(), Index.bc.getAtras2(), 1));
-                System.out.println("Lado izquierdo");
-                
-            } else
-            {
-                //No Remisos insertarán de lado der (modifica el atras2)
-                Index.bc.setAtras2(Index.bc.inserta(txtNombre.getText(), Index.bc.getAtras2(), Index.bc.getAtras1(), -1));
-                System.out.println("Lado derecho");
-            }
+            
             this.dispose();
             this.setVisible(false);
             new Index().setVisible(true);
-        }else{
+        } else
+        {
             JOptionPane.showMessageDialog(this, "Los menores de edad no pueden ser registrados");
             txtClase.setText("");
             txtNombre.setText("");
         }
-        
-        /********************** H E L P *********************/
-            
-  
-             
+
+        /**
+         * ******************** H E L P ********************
+         */
+
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtNombreKeyTyped

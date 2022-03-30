@@ -22,8 +22,8 @@ public class Index extends javax.swing.JFrame
 
     public static ColasD general;
     public static Bicolas bcolas;
-    public  static boolean ban = false;
-    public static Bicolas<String> bc = new Bicolas<>(new String[1000]);
+    public static boolean ban = false;
+    public static Bicolas<Nodo> bc = new Bicolas<>(new Nodo[1000]);
 
     /**
      * Creates new form Index
@@ -31,7 +31,8 @@ public class Index extends javax.swing.JFrame
     public Index()
     {
         initComponents();
-        if(!ban){
+        if (!ban)
+        {
             general = new ColasD();
             ban = true;
         }
@@ -55,9 +56,9 @@ public class Index extends javax.swing.JFrame
 
         tablaPri.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]
         {
-            "Nombre","Clase","Remisos"
+            "Nombre", "Clase", "Remisos"
         })
-              
+
         {
             @Override
             public boolean isCellEditable(int filas, int columnas)
@@ -73,27 +74,26 @@ public class Index extends javax.swing.JFrame
         }
         );
         tablaPri.setEnabled(false);
-        
-        Nodo aux  = tmp.elimina();
+
+        Nodo aux = tmp.elimina();
         while (aux != null)
         {
             Index.general.inserta(aux);
             aux = tmp.elimina();
         }
     }
-    
+
     public void mostrarRemisos()
     {
         ColasD tmp2 = new ColasD();
-        int tamanio = Index.bcolas.getAtras1();        
+        int tamanio = Index.bcolas.getAtras1();
         String matriz[][] = new String[tamanio][3];
         for (int i = 0; i < tamanio; i++)
         {
             Object arr[] = bcolas.elimina(bcolas.getAtras2(), bcolas.getCola().length, -1);
             arr = bcolas.elimina(bcolas.getAtras1(), -1, 1);
             bcolas.setAtras1((int) arr[1]);
-            
-            
+
             Nodo aux = Index.general.elimina();
             CartillaMilitar obj = (CartillaMilitar) aux.getObj();
             matriz[i][0] = obj.getNombre();
@@ -104,9 +104,9 @@ public class Index extends javax.swing.JFrame
 
         tablaPri.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]
         {
-            "Nombre","Clase","Remisos"
+            "Nombre", "Clase", "Remisos"
         })
-              
+
         {
             @Override
             public boolean isCellEditable(int filas, int columnas)
@@ -122,29 +122,28 @@ public class Index extends javax.swing.JFrame
         }
         );
         tablaPri.setEnabled(false);
-        
-        Nodo aux  = tmp2.elimina();
+
+        Nodo aux = tmp2.elimina();
         while (aux != null)
         {
             Index.general.inserta(aux);
             aux = tmp2.elimina();
         }
     }
-    
-    
-     public void mostrarEnc(Nodo enc)
+
+    public void mostrarEnc(Nodo enc)
     {
         String matriz[][] = new String[1][3];
-            CartillaMilitar obj = (CartillaMilitar) enc.getObj();
-            matriz[0][0] = obj.getNombre();
-            matriz[0][1] = obj.getClase() + "";
-            matriz[0][2] = obj.getRemiso() + "";
+        CartillaMilitar obj = (CartillaMilitar) enc.getObj();
+        matriz[0][0] = obj.getNombre();
+        matriz[0][1] = obj.getClase() + "";
+        matriz[0][2] = obj.getRemiso() + "";
 
         tablaPri.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]
         {
-            "Nombre","Clase","Remisos"
+            "Nombre", "Clase", "Remisos"
         })
-              
+
         {
             @Override
             public boolean isCellEditable(int filas, int columnas)
@@ -161,7 +160,6 @@ public class Index extends javax.swing.JFrame
         );
         tablaPri.setEnabled(false);
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -235,7 +233,7 @@ public class Index extends javax.swing.JFrame
             }
         });
 
-        btnRemisos.setText("Remisos");
+        btnRemisos.setText("Quitar Remisos");
         btnRemisos.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -272,12 +270,11 @@ public class Index extends javax.swing.JFrame
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(btnRemisos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnTodos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(btnQuitarRemisos)
-                            .addComponent(btnAltas, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnRemisos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnTodos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAltas, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnQuitarRemisos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -329,14 +326,51 @@ public class Index extends javax.swing.JFrame
 
     private void btnRemisosActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnRemisosActionPerformed
     {//GEN-HEADEREND:event_btnRemisosActionPerformed
-        // TODO add your handling code here:
+        // Lado Izquierdo
+
+//        if (edad > 18)
+//            {
+//                //Remisos se insertarán de lado izq (modifica el atras1)
+//                Index.bc.setAtras1(Index.bc.inserta(txtNombre.getText(), Index.bc.getAtras1(), Index.bc.getAtras2(), 1));
+//                System.out.println("Lado izquierdo");
+//                
+//            } else
+//            {
+//                //No Remisos insertarán de lado der (modifica el atras2)
+//                Index.bc.setAtras2(Index.bc.inserta(txtNombre.getText(), Index.bc.getAtras2(), Index.bc.getAtras1(), -1));
+//                System.out.println("Lado derecho");
+//            }
+        Nodo aux = general.elimina();
+        int can = 0;
+        while (aux != null)
+        {
+            CartillaMilitar obj = (CartillaMilitar) aux.getObj();
+            if (obj.getClase() > 18)
+            {
+                Index.bc.setAtras1(Index.bc.inserta(aux, Index.bc.getAtras1(), Index.bc.getAtras2(), 1));
+                System.out.println("Lado izquierdo");
+            } else
+            {
+                Index.bc.setAtras2(Index.bc.inserta(aux, Index.bc.getAtras2(), Index.bc.getAtras1(), -1));
+                System.out.println("Lado derecho");
+                can++;
+            }
+            aux = general.elimina();
+        }
+
+        /*
         
-        
-        
-        
-        
-        
-        
+         */
+        for (int i = 0; i < can; i++)
+        {
+            Object arr[] = bc.elimina(bc.getAtras2(), bc.getCola().length, -1);
+            bc.setAtras2((int) arr[1]);
+            Nodo nw = (Nodo) arr[0];
+            general.inserta(nw);
+        }
+        mostrarTodos();
+
+
     }//GEN-LAST:event_btnRemisosActionPerformed
 
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtBuscarActionPerformed
