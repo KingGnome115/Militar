@@ -32,6 +32,7 @@ public class Index extends javax.swing.JFrame
             general = new ColasD();
             ban = true;
         }
+        mostrarTodos();
     }
 
     public void mostrarTodos()

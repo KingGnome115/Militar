@@ -77,6 +77,13 @@ public class AltaMilitar extends javax.swing.JFrame
         });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         txtClase.addActionListener(new java.awt.event.ActionListener()
         {
@@ -204,6 +211,12 @@ public class AltaMilitar extends javax.swing.JFrame
     {//GEN-HEADEREND:event_txtClaseActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtClaseActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCancelarActionPerformed
+    {//GEN-HEADEREND:event_btnCancelarActionPerformed
+        this.dispose();
+        new Index().setVisible(true);
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
