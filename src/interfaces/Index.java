@@ -24,6 +24,8 @@ public class Index extends javax.swing.JFrame
     public static Bicolas bcolas;
     public static boolean ban = false;
     public static Bicolas<Nodo> bc = new Bicolas<>(new Nodo[1000]);
+    private ColasD tmp;
+    private int canI = 0;
 
     /**
      * Creates new form Index
@@ -85,21 +87,17 @@ public class Index extends javax.swing.JFrame
 
     public void mostrarRemisos()
     {
-        ColasD tmp2 = new ColasD();
-        int tamanio = Index.bcolas.getAtras1();
-        String matriz[][] = new String[tamanio][3];
-        for (int i = 0; i < tamanio; i++)
+        PilasD tmpo = new PilasD();
+        int tama = tmp.getTam();
+        String matriz[][] = new String[tama][3];
+        for (int i = 0; i < tama; i++)
         {
-            Object arr[] = bcolas.elimina(bcolas.getAtras2(), bcolas.getCola().length, -1);
-            arr = bcolas.elimina(bcolas.getAtras1(), -1, 1);
-            bcolas.setAtras1((int) arr[1]);
-
             Nodo aux = Index.general.elimina();
             CartillaMilitar obj = (CartillaMilitar) aux.getObj();
             matriz[i][0] = obj.getNombre();
             matriz[i][1] = obj.getClase() + "";
             matriz[i][2] = obj.getRemiso() + "";
-            tmp2.inserta(aux);
+            tmpo.inserta(aux);
         }
 
         tablaPri.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]
@@ -123,11 +121,11 @@ public class Index extends javax.swing.JFrame
         );
         tablaPri.setEnabled(false);
 
-        Nodo aux = tmp2.elimina();
+        Nodo aux = tmpo.elimina();
         while (aux != null)
         {
             Index.general.inserta(aux);
-            aux = tmp2.elimina();
+            aux = tmpo.elimina();
         }
     }
 
@@ -242,7 +240,7 @@ public class Index extends javax.swing.JFrame
             }
         });
 
-        btnQuitarRemisos.setText("!Remisos");
+        btnQuitarRemisos.setText("Remisos");
         btnQuitarRemisos.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -273,8 +271,8 @@ public class Index extends javax.swing.JFrame
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(btnRemisos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnTodos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAltas, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnQuitarRemisos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnQuitarRemisos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAltas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -289,7 +287,7 @@ public class Index extends javax.swing.JFrame
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(60, 60, 60)
@@ -298,7 +296,7 @@ public class Index extends javax.swing.JFrame
                         .addComponent(btnRemisos)
                         .addGap(18, 18, 18)
                         .addComponent(btnQuitarRemisos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnAltas)))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
@@ -320,57 +318,57 @@ public class Index extends javax.swing.JFrame
 
     private void btnQuitarRemisosActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnQuitarRemisosActionPerformed
     {//GEN-HEADEREND:event_btnQuitarRemisosActionPerformed
-        // TODO add your handling code here:
+
+//        for (int i = 0; i > canI; i++)
+//        {
+//            Object arr[] = bc.elimina(bc.getAtras1(), -1, 1);
+//            bc.setAtras1((int) arr[1]);
+//            Nodo nw = (Nodo) arr[0];
+//            general.inserta(nw);
+//        }
+//
+//        mostrarRemisos();
+        
+        JOptionPane.showMessageDialog(this, "Opcion en desarrollo");
+        
+        
 
     }//GEN-LAST:event_btnQuitarRemisosActionPerformed
 
     private void btnRemisosActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnRemisosActionPerformed
     {//GEN-HEADEREND:event_btnRemisosActionPerformed
-        // Lado Izquierdo
-
-//        if (edad > 18)
-//            {
-//                //Remisos se insertarán de lado izq (modifica el atras1)
-//                Index.bc.setAtras1(Index.bc.inserta(txtNombre.getText(), Index.bc.getAtras1(), Index.bc.getAtras2(), 1));
-//                System.out.println("Lado izquierdo");
-//                
-//            } else
-//            {
-//                //No Remisos insertarán de lado der (modifica el atras2)
-//                Index.bc.setAtras2(Index.bc.inserta(txtNombre.getText(), Index.bc.getAtras2(), Index.bc.getAtras1(), -1));
-//                System.out.println("Lado derecho");
-//            }
-        Nodo aux = general.elimina();
-        int can = 0;
-        while (aux != null)
-        {
-            CartillaMilitar obj = (CartillaMilitar) aux.getObj();
-            if (obj.getClase() > 18)
+        // Lado Izquierdo remisos
+        if(Index.general.getTam()>0){
+            Nodo aux = general.elimina();
+            int can = 0;
+            while (aux != null)
             {
-                Index.bc.setAtras1(Index.bc.inserta(aux, Index.bc.getAtras1(), Index.bc.getAtras2(), 1));
-                System.out.println("Lado izquierdo");
-            } else
-            {
-                Index.bc.setAtras2(Index.bc.inserta(aux, Index.bc.getAtras2(), Index.bc.getAtras1(), -1));
-                System.out.println("Lado derecho");
-                can++;
+                CartillaMilitar obj = (CartillaMilitar) aux.getObj();
+                if (obj.getClase() > 18)
+                {
+                    Index.bc.setAtras1(Index.bc.inserta(aux, Index.bc.getAtras1(), Index.bc.getAtras2(), 1));
+                    System.out.println("Lado izquierdo");
+                    canI++;
+                } else
+                {
+                    Index.bc.setAtras2(Index.bc.inserta(aux, Index.bc.getAtras2(), Index.bc.getAtras1(), -1));
+                    System.out.println("Lado derecho");
+                    can++;
+                }
+                aux = general.elimina();
             }
-            aux = general.elimina();
+
+            for (int i = 0; i < can; i++)
+            {
+                Object arr[] = bc.elimina(bc.getAtras2(), bc.getCola().length, -1);
+                bc.setAtras2((int) arr[1]);
+                Nodo nw = (Nodo) arr[0];
+                general.inserta(nw);
+            }
+            mostrarTodos();
+        }else{
+            JOptionPane.showMessageDialog(this, "No hay datos en la cola");
         }
-
-        /*
-        
-         */
-        for (int i = 0; i < can; i++)
-        {
-            Object arr[] = bc.elimina(bc.getAtras2(), bc.getCola().length, -1);
-            bc.setAtras2((int) arr[1]);
-            Nodo nw = (Nodo) arr[0];
-            general.inserta(nw);
-        }
-        mostrarTodos();
-
-
     }//GEN-LAST:event_btnRemisosActionPerformed
 
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtBuscarActionPerformed
@@ -443,7 +441,14 @@ public class Index extends javax.swing.JFrame
 
     private void btnTodosActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnTodosActionPerformed
     {//GEN-HEADEREND:event_btnTodosActionPerformed
-        mostrarTodos();
+        
+        if(Index.general.getTam() > 0)
+        {
+            mostrarTodos();
+        }else{
+            JOptionPane.showMessageDialog(this, "No hay datos");
+        }
+        
     }//GEN-LAST:event_btnTodosActionPerformed
 
     /**
